@@ -1,0 +1,5 @@
+{
+  "test_sensor.py::test_elote_tamales_on_menu": true,
+  "test_sensor.py::test_no_tamales_on_menu": true,
+  "test_sensor.py::test_shrimp_tamales_not_elote": true
+}
