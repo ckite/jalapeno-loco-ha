@@ -1,0 +1,10 @@
+{
+  "manifest_version": 1,
+  "domain": "jalapeno_loco",
+  "name": "Jalapeño Loco Specials",
+  "codeowners": ["@user"],
+  "documentation": "https://github.com/user/jalapeno-loco-ha",
+  "requirements": ["beautifulsoup4>=4.9.0"],
+  "version": "1.0.0",
+  "homeassistant": "2024.1.0"
+}

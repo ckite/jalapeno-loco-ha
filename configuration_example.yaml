@@ -1,0 +1,42 @@
+# Add this to your configuration.yaml
+
+jalapeno_loco:
+
+# Optional: Create an automation to check at 8 AM and 4 PM
+automation:
+  - alias: "Update Elote Tamales Sensor - 8 AM"
+    trigger:
+      platform: time
+      at: "08:00:00"
+    action:
+      service: homeassistant.update_entity
+      target:
+        entity_id: sensor.elote_tamales
+
+  - alias: "Update Elote Tamales Sensor - 4 PM"
+    trigger:
+      platform: time
+      at: "16:00:00"
+    action:
+      service: homeassistant.update_entity
+      target:
+        entity_id: sensor.elote_tamales
+
+# Optional: Create a template sensor to show a friendlier message
+template:
+  - sensor:
+      - name: "Elote Tamales Status"
+        unique_id: "sensor.elote_tamales_status"
+        state: >
+          {% if states('sensor.elote_tamales') == 'available' %}
+            {{ [
+              '🌮 ELOTE TAMALES ARE AVAILABLE!',
+              'Price: ' ~ (state_attr('sensor.elote_tamales', 'price') or 'TBD'),
+              '(through ' ~ (state_attr('sensor.elote_tamales', 'end_date') or 'unknown') ~ ')'
+            ] | join('\n') }}
+          {% else %}
+            {{ [
+              '❌ Elote Tamales not available.',
+              'Next specials: ' ~ (state_attr('sensor.elote_tamales', 'date_range') or 'unknown')
+            ] | join('\n') }}
+          {% endif %}
