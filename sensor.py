@@ -88,6 +88,8 @@ class EeloteTamalesSensor(SensorEntity):
                 # Parse end date for cleaner attribute
                 try:
                     end_date_str = date_match.group(2)
+                    # Strip ordinal suffixes: "4th" -> "4", "22nd" -> "22", etc.
+                    end_date_str = re.sub(r"(\d+)(?:st|nd|rd|th)\b", r"\1", end_date_str)
                     end_date = datetime.strptime(end_date_str, "%B %d").replace(year=datetime.now().year)
                     self._date_range_end = end_date.strftime("%Y-%m-%d")
                 except ValueError:
